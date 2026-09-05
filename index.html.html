@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Site sobre a disciplina de Publicidade e Propaganda do Curso Técnico em Informática.">
+  <meta name="author" content="Alyce Moreira da Silva Curso Técnico em Informática">
+  <title>Publicidade e Propaganda | Técnico em Informática</title>
+
+  <!-- Bootstrap: template/base utilizada no projeto -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <style>
+    :root {
+      --verde: rgba(11, 44, 94, 0.94);
+      --verde-escuro: rgba(29, 62, 104, 0.527);
+      --verde-claro: rgba(41, 82, 145, 0.18);
+      --escuro: #17221b;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; color: #26332a; }
+    section { scroll-margin-top: 75px; }
+
+    .navbar { background: rgba(255,255,255,.97); box-shadow: 0 2px 15px rgba(0,0,0,.08); }
+    .navbar-brand { font-weight: 800; color: var(--verde-escuro) !important; }
+    .nav-link { font-weight: 600; }
+    .nav-link:hover, .nav-link.active { color: var(--verde) !important; }
+
+    /* Centraliza a barra de navegação em telas maiores */
+    @media (min-width: 992px) {
+      .navbar .container { position: relative; }
+      .navbar-collapse { justify-content: center; }
+      .navbar-nav { margin-left: auto !important; margin-right: auto !important; }
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(11, 44, 94, 0.94), rgba(29, 62, 104, 0.527)),
+                  radial-gradient(circle at top right, rgba(41, 82, 145, 0.18), transparent 35%);
+      color: white;
+      padding: 110px 0 70px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 420px; height: 420px;
+      border: 70px solid rgba(255,255,255,.06);
+      border-radius: 50%;
+      right: -130px; bottom: -160px;
+    }
+    .hero .badge { background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25); }
+    .hero h1 { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 800; line-height: 1.05; }
+    .hero p { font-size: 1.15rem; max-width: 760px; color: rgba(255,255,255,.88); }
+
+    .btn-primary { background: var(--verde); border-color: var(--verde); }
+    .btn-primary:hover { background: var(--verde-escuro); border-color: var(--verde-escuro); }
+    .btn-outline-light:hover { color: var(--verde-escuro); }
+
+    .section-title { font-weight: 800; color: var(--escuro); }
+    .divider { width: 70px; height: 4px; background: var(--verde); border-radius: 20px; margin: 0 auto 24px; opacity: 1; }
+    .section-soft { background: #f7faf8; }
+
+    .info-card, .tool-card, .knowledge-card, .project-card {
+      height: 100%; border: 0; border-radius: 18px; box-shadow: 0 8px 28px rgba(41, 82, 145, 0.18);
+      transition: transform .2s ease, box-shadow .2s ease;
+      background: white;
+    }
+    .info-card:hover, .tool-card:hover, .project-card:hover { transform: translateY(-5px); box-shadow: 0 14px 35px rgba(20,50,30,.13); }
+    .icon-circle {
+      width: 58px; height: 58px; display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 50%; background: var(--verde-claro); color: var(--verde-escuro); font-size: 1.5rem;
+    }
+    .corel-feature { min-height: 390px; background: linear-gradient(120deg, rgba(41, 82, 145, 0.18), rgba(29, 62, 104, 0.527)), url("assets/img/imgFundo.jpeg") center/cover; box-shadow: 0 12px 40px rgba(20,50,30,.14); }
+    .corel-overlay { position:absolute; inset:0; background:radial-gradient(circle at 85% 25%, rgba(255,255,255,.16), transparent 30%); }
+    .corel-icon { width:150px; height:150px; margin:auto; display:flex; align-items:center; justify-content:center; border-radius:50%; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); font-size:4.5rem; backdrop-filter:blur(4px); }
+    .tool-card { border-top: 4px solid var(--verde); }
+    .project-number { font-size: .8rem; font-weight: 800; color: var(--verde); letter-spacing: .08em; }
+
+    .timeline { border-left: 3px solid #cfe8d7; }
+    .timeline-item { position: relative; padding-left: 24px; }
+    .timeline-item::before {
+      content: ""; position: absolute; left: -9px; top: 5px; width: 15px; height: 15px;
+      border-radius: 50%; background: var(--verde); border: 3px solid white; box-shadow: 0 0 0 2px #cfe8d7;
+    }
+
+    .cta { background:url("assets/img/imgfundo2.jpg") center/cover}
+    footer { background: #0f1712; color: rgba(255,255,255,.7); }
+    footer strong { color: white; }
+
+    /* Ajustes de responsividade para celulares */
+    .navbar-toggler { border: 0; padding: .5rem; }
+    .navbar-toggler:focus { box-shadow: 0 0 0 .2rem rgba(42,140,74,.18); }
+    .navbar-toggler-icon {
+      background-image: var(--bs-navbar-toggler-icon-bg);
+    }
+
+    @media (max-width: 991.98px) {
+      .navbar-collapse {
+        background: #fff;
+        margin-top: .75rem;
+        padding: .5rem 0;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(20,50,30,.08);
+      }
+      .navbar-nav { padding: .25rem .75rem; }
+      .nav-link { padding: .65rem .75rem !important; }
+    }
+
+    @media (max-width: 767px) {
+      .hero { min-height: 85vh; text-align: center; padding: 110px 0 55px; }
+      .hero p { margin-left: auto; margin-right: auto; font-size: 1rem; }
+      .hero .badge { font-size: .78rem; line-height: 1.4; white-space: normal; }
+      .hero h1 { font-size: clamp(2.35rem, 12vw, 3.5rem); }
+      .hero .d-flex { justify-content: center; }
+      .hero .btn { width: 100%; max-width: 320px; }
+      .section-title { font-size: clamp(1.9rem, 9vw, 2.6rem); }
+      .project-card { min-height: auto; }
+      .project-card .d-flex { align-items: flex-start !important; }
+      .icon-circle { width: 50px; height: 50px; min-width: 50px; }
+      .modal-dialog { margin: .75rem; }
+      .modal-content { border-radius: 16px; }
+      .modal-header { padding: 1rem; }
+      .modal-body { padding: 1rem; }
+      .modal-body h3 { font-size: 1rem; line-height: 1.35; }
+      .modal-body p { font-size: .94rem; line-height: 1.55; }
+      .modal-body .btn { width: 100%; }
+      .container { padding-left: 18px; padding-right: 18px; }
+    }
+
+    @media (max-width: 380px) {
+      .navbar-brand { font-size: .95rem; }
+      .hero h1 { font-size: 2.25rem; }
+      .hero .badge { font-size: .72rem; }
+      .project-card { padding: 1rem !important; }
+      .project-card .icon-circle { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAVEGAÇÃO -->
+  <nav class="navbar navbar-expand-lg fixed-top py-3" aria-label="Navegação principal">
+    <div class="container">
+      <a class="navbar-brand" href="#inicio">Publicidade & Propaganda</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="#inicio">Início</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
+          <li class="nav-item"><a class="nav-link" href="#conteudos">Conteúdos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#ferramentas">Ferramentas</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projetos">Projetos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#conhecimentos">Conhecimentos</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- INÍCIO -->
+  <header class="hero" id="inicio">
+    <div class="container position-relative" style="z-index:1;">
+      <div class="row">
+        <div class="col-lg-10">
+          <span class="badge rounded-pill px-3 py-2 mb-4">Curso Técnico em Informática • Trabalho em dupla</span>
+          <h1>Publicidade e<br><span style="color:#b9e8c6;">Propaganda</span></h1>
+          <p class="mt-4 mb-4">Um panorama da disciplina, seus principais conteúdos, ferramentas, tecnologias, atividades e conhecimentos desenvolvidos durante a formação técnica.</p>
+          <div class="d-flex gap-3 flex-wrap">
+            <a href="#sobre" class="btn btn-light btn-lg px-4">Conheça a disciplina</a>
+            <a href="#conteudos" class="btn btn-outline-light btn-lg px-4">Ver conteúdos</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SOBRE / DESCRIÇÃO -->
+  <section class="py-5 py-lg-6" id="sobre">
+    <div class="container py-5">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <p class="text-uppercase fw-bold mb-2" style="color:var(--verde); letter-spacing:.1em;">Sobre a disciplina</p>
+          <h2 class="section-title display-6 mb-3">O que é Publicidade e Propaganda?</h2>
+          <div class="divider" style="margin-left:0;"></div>
+          <p class="lead">Publicidade e Propaganda envolve a criação e o planejamento de mensagens destinadas a comunicar ideias, produtos, serviços ou marcas para um público definido.</p>
+          <p>Na formação técnica, a disciplina permite compreender como texto, imagem, criatividade, comunicação, planejamento e ferramentas digitais podem ser combinados para desenvolver peças e campanhas de comunicação.</p>
+        </div>
+        <div class="col-lg-6">
+          <div class="p-4 p-lg-5 rounded-4" style="background:var(--verde-claro);">
+            <h3 class="h4 fw-bold mb-4">Por que estudar essa disciplina?</h3>
+            <div class="d-flex gap-3 mb-4"><i class="bi bi-chat-square-text fs-3" style="color:var(--verde);"></i><div><strong>Comunicação</strong><br><span class="text-muted">Aprender a transmitir mensagens de forma clara e adequada ao público.</span></div></div>
+            <div class="d-flex gap-3 mb-4"><i class="bi bi-lightbulb fs-3" style="color:var(--verde);"></i><div><strong>Criatividade</strong><br><span class="text-muted">Desenvolver ideias e soluções para diferentes objetivos de comunicação.</span></div></div>
+            <div class="d-flex gap-3"><i class="bi bi-graph-up-arrow fs-3" style="color:var(--verde);"></i><div><strong>Planejamento</strong><br><span class="text-muted">Organizar estratégias e ações para alcançar resultados.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPAIS CONTEÚDOS -->
+  <section class="section-soft py-5" id="conteudos">
+    <div class="container py-5">
+      <div class="text-center mb-5">
+        <p class="text-uppercase fw-bold mb-2" style="color:var(--verde); letter-spacing:.1em;">O que é estudado</p>
+        <h2 class="section-title display-6">Principais conteúdos</h2>
+        <div class="divider"></div>
+        <p class="text-muted mx-auto" style="max-width:720px;">Os conteúdos apresentados foram trabalhados ao longo da disciplina, com destaque para criação de logotipos, ferramentas do CorelDRAW e conceitos de publicidade e propaganda.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="card info-card p-4">
+            <div class="icon-circle mb-4"><i class="bi bi-megaphone"></i></div>
+            <h3 class="h5 fw-bold">Comunicação</h3>
+            <p class="text-muted mb-0">Conceitos de comunicação, público-alvo, linguagem e formas de transmitir uma mensagem.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="card info-card p-4">
+            <div class="icon-circle mb-4"><i class="bi bi-palette"></i></div>
+            <h3 class="h5 fw-bold">Criação publicitária</h3>
+            <p class="text-muted mb-0">Desenvolvimento de ideias, textos, imagens, conceitos visuais e peças para campanhas.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="card info-card p-4">
+            <div class="icon-circle mb-4"><i class="bi bi-phone"></i></div>
+            <h3 class="h5 fw-bold">Marketing digital</h3>
+            <p class="text-muted mb-0">Uso de redes sociais e canais digitais para divulgar conteúdos e aproximar marcas do público.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="card info-card p-4">
+            <div class="icon-circle mb-4"><i class="bi bi-diagram-3"></i></div>
+            <h3 class="h5 fw-bold">Planejamento</h3>
+            <p class="text-muted mb-0">Definição de objetivos, público, estratégias, ações e organização de campanhas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FERRAMENTAS -->
+  <section class="py-5" id="ferramentas">
+    <div class="container py-5">
+      <div class="text-center mb-5">
+        <p class="text-uppercase fw-bold mb-2" style="color:var(--verde); letter-spacing:.1em;">Recursos utilizados</p>
+        <h2 class="section-title display-6">Programas, ferramentas e tecnologias</h2>
+        <div class="divider"></div>
+        <p class="text-muted mx-auto" style="max-width:720px;">Durante a disciplina, utilizamos ferramentas de criação gráfica para desenvolver e refazer logotipos e outras peças visuais.</p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-11">
+          <div class="corel-feature rounded-4 overflow-hidden position-relative">
+            <div class="corel-overlay"></div>
+            <div class="position-relative p-4 p-md-5 text-white">
+              <div class="row align-items-center g-4">
+                <div class="col-lg-8">
+                  <span class="badge rounded-pill px-3 py-2 mb-3" style="background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.25);">Ferramenta utilizada na disciplina</span>
+                  <h3 class="display-6 fw-bold mb-3">CorelDRAW</h3>
+                  <p class="lead mb-3">O CorelDRAW é um programa de design gráfico utilizado para criar e editar imagens vetoriais e desenvolver diferentes tipos de materiais visuais.</p>
+                  <p class="mb-0" style="color:rgba(255,255,255,.88);">Durante a disciplina de Publicidade e Propaganda, utilizamos o CorelDRAW principalmente na criação e reprodução de logotipos. Aprendemos a trabalhar com régua, formas geométricas, ferramenta Caneta, texto em curvas, gradientes, linhas e alterações de formas, aplicando esses recursos em diferentes atividades práticas.</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                  <div class="corel-icon"><i class="bi bi-vector-pen"></i></div>
+                  <p class="fw-bold mb-0 mt-3">Criação • Edição • Design</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETOS / ATIVIDADES -->
+  <section class="section-soft py-5" id="projetos">
+    <div class="container py-5">
+      <div class="text-center mb-5">
+        <p class="text-uppercase fw-bold mb-2" style="color:var(--verde); letter-spacing:.1em;">Aplicação prática</p>
+        <h2 class="section-title display-6">Atividades e projetos</h2>
+        <div class="divider"></div>
+        <p class="text-muted mx-auto" style="max-width:760px;">Nesta seção apresentamos as atividades realizadas pela turma durante o primeiro trimestre, mostrando a evolução dos conteúdos e das ferramentas utilizadas na disciplina.</p>
+      </div>
+      <div class="row justify-content-center g-4">
+        <div class="col-md-6 col-lg-5">
+          <button type="button" class="card project-card p-4 text-start w-100 border-0" data-bs-toggle="modal" data-bs-target="#modalPrimeiroTrimestre" style="cursor:pointer;">
+            <div class="d-flex align-items-center gap-3">
+              <div class="icon-circle flex-shrink-0"><i class="bi bi-calendar3"></i></div>
+              <div>
+                <div class="project-number mb-1">CONTEÚDOS</div>
+                <h3 class="h4 fw-bold mb-1">1º Trimestre</h3>
+                <p class="text-muted mb-0">Clique para visualizar as aulas e atividades realizadas no primeiro trimestre.</p>
+              </div>
+            </div>
+          </button>
+        </div>
+        <div class="col-md-6 col-lg-5">
+          <button type="button" class="card project-card p-4 text-start w-100 border-0" data-bs-toggle="modal" data-bs-target="#modalSegundoTrimestre" style="cursor:pointer;">
+            <div class="d-flex align-items-center gap-3">
+              <div class="icon-circle flex-shrink-0"><i class="bi bi-calendar3"></i></div>
+              <div>
+                <div class="project-number mb-1">CONTEÚDOS</div>
+                <h3 class="h4 fw-bold mb-1">2º Trimestre</h3>
+                <p class="text-muted mb-0">Clique para visualizar as aulas, atividades e avaliações realizadas no segundo trimestre.</p>
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL - 1º TRIMESTRE -->
+  <div class="modal fade" id="modalPrimeiroTrimestre" tabindex="-1" aria-labelledby="modalPrimeiroTrimestreLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <p class="text-uppercase fw-bold mb-1" style="color:var(--verde); letter-spacing:.08em;">Publicidade e Propaganda</p>
+            <h2 class="modal-title h4 fw-bold" id="modalPrimeiroTrimestreLabel">Conteúdos do 1º Trimestre</h2>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-4">
+            <h3 class="h5 fw-bold">28/01 — Introdução à Publicidade e Propaganda</h3>
+            <p class="text-muted">Nesta aula, aprendemos um pouco sobre o que é publicidade e propaganda e conhecemos os conceitos iniciais da disciplina.</p>
+            <a class="btn btn-sm btn-outline-success" href="https://politecvirtual.com.br/mod/resource/view.php?id=39176" target="_blank" rel="noopener noreferrer">Ver material da aula</a>
+          </div>
+          <hr>
+          <div class="mb-4">
+            <h3 class="h5 fw-bold">04/02 — Atividade: Logotipo Mother Board e CTI</h3>
+            <p class="text-muted">Refizemos os logotipos das marcas citadas. Aprendemos a utilizar a régua no CorelDRAW e ferramentas simples, como formas geométricas.</p>
+            <a class="btn btn-sm btn-outline-success" href="https://politecvirtual.com.br/mod/assign/view.php?id=39178" target="_blank" rel="noopener noreferrer">Ver atividade</a>
+          </div>
+          <hr>
+          <div class="mb-4">
+            <h3 class="h5 fw-bold">11/02 — Atividade: Logotipo eUniverse</h3>
+            <p class="text-muted">Foi uma continuação do conteúdo anterior, com o objetivo de reforçar os conhecimentos trabalhados na criação de logotipos.</p>
+            <a class="btn btn-sm btn-outline-success" href="https://politecvirtual.com.br/mod/assign/view.php?id=39206" target="_blank" rel="noopener noreferrer">Ver atividade</a>
+          </div>
+          <hr>
+          <div class="mb-4">
+            <h3 class="h5 fw-bold">25/02 — Atividade: Logotipo Heliotek + Citroen + Apple</h3>
+            <p class="text-muted">Aprendemos a utilizar a ferramenta Caneta e a alterar formas geométricas durante a criação dos logotipos.</p>
+            <a class="btn btn-sm btn-outline-success" href="https://politecvirtual.com.br/mod/assign/view.php?id=39235" target="_blank" rel="noopener noreferrer">Ver atividade</a>
+          </div>
+          <hr>
+          <div class="mb-4">
+            <h3 class="h5 fw-bold">04/03 — Atividade: Logotipo Adobe / Audi / Mit</h3>
+            <p class="text-muted">Uma nova prática e revisão dos conteúdos anteriores, trabalhando com marcas diferentes.</p>
+            <a class="btn btn-sm btn-outline-success" href="https://politecvirtual.com.br/mod/assign/view.php?id=39260" target="_blank" rel="noopener noreferrer">Ver atividade</a>
+          </div>
+          <hr>
+          <div class="mb-4">
+            <h3 class="h5 fw-bold">25/03 — Atividade: HEXEL / Z / DISK TECH</h3>
+            <p class="text-muted">Aprendemos a criar gradientes e a produzir linhas com efeito de maior para menor, aplicando esses recursos na construção das marcas.</p>
+            <a class="btn btn-sm btn-outline-success" href="https://politecvirtual.com.br/mod/assign/view.php?id=39340" target="_blank" rel="noopener noreferrer">Ver atividade</a>
+          </div>
+          <hr>
+          <div class="mb-4">
+            <h3 class="h5 fw-bold">01/04 — Atividade: Sony / Mastercard</h3>
+            <p class="text-muted">Refizemos a logo da Sony utilizando o mesmo efeito aprendido na atividade anterior, reforçando a prática com gradientes e linhas.</p>
+            <a class="btn btn-sm btn-outline-success" href="https://politecvirtual.com.br/mod/assign/view.php?id=39352" target="_blank" rel="noopener noreferrer">Ver atividade</a>
+          </div>
+          <hr>
+          <div>
+            <h3 class="h5 fw-bold">08/04 — Atividade Avaliativa: Programa Artemis II</h3>
+            <p class="text-muted">Nesta atividade avaliativa, tivemos que criar uma nova logo para a missão Artemis II, aplicando os conhecimentos desenvolvidos ao longo do trimestre.</p>
+            <a class="btn btn-sm btn-outline-success" href="https://politecvirtual.com.br/mod/assign/view.php?id=39367" target="_blank" rel="noopener noreferrer">Ver atividade</a>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL - 2º TRIMESTRE -->
+  <div class="modal fade" id="modalSegundoTrimestre" tabindex="-1" aria-labelledby="modalSegundoTrimestreLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <p class="text-uppercase fw-bold mb-1" style="color:var(--verde); letter-spacing:.08em;">Publicidade e Propaganda</p>
+            <h2 class="modal-title h4 fw-bold" id="modalSegundoTrimestreLabel">Conteúdos do 2º Trimestre</h2>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-4">
+            <h3 class="h5 fw-bold">13/05 — Atividade: Texto em Curvas</h3>
+            <p class="text-muted">Nesta atividade, trabalhamos com texto em curvas, desenvolvendo a utilização dos recursos de texto e formas no CorelDRAW.</p>
+            <a class="btn btn-sm btn-outline-success" href="https://politecvirtual.com.br/mod/assign/view.php?id=39484" target="_blank" rel="noopener noreferrer">Ver atividade</a>
+          </div>
+          <hr>
+          <div class="mb-4">
+            <h3 class="h5 fw-bold">27/05 — Atividade: Redesign CBF</h3>
+            <p class="text-muted">Realizamos uma proposta de redesign da identidade visual da CBF, aplicando os conhecimentos de criação e edição gráfica.</p>
+            <a class="btn btn-sm btn-outline-success" href="https://politecvirtual.com.br/mod/assign/view.php?id=39502" target="_blank" rel="noopener noreferrer">Ver atividade</a>
+          </div>
+          <hr>
+          <div class="mb-4">
+            <h3 class="h5 fw-bold">30/05 — Atividade Colab: Tutorial em Inglês</h3>
+            <p class="text-muted">Atividade colaborativa envolvendo a produção de um tutorial em inglês.</p>
+            <a class="btn btn-sm btn-outline-success" href="https://politecvirtual.com.br/mod/assign/view.php?id=39424" target="_blank" rel="noopener noreferrer">Ver atividade</a>
+          </div>
+          <hr>
+          <div class="mb-4">
+            <h3 class="h5 fw-bold">10/06 — Avaliação Mensal: Redesign Federação</h3>
+            <p class="text-muted">Avaliação mensal com proposta de redesign de uma federação, colocando em prática os conhecimentos desenvolvidos nas atividades anteriores.</p>
+            <a class="btn btn-sm btn-outline-success" href="https://politecvirtual.com.br/mod/assign/view.php?id=39535" target="_blank" rel="noopener noreferrer">Ver avaliação</a>
+          </div>
+          <hr>
+          <div class="mb-4">
+            <h3 class="h5 fw-bold">Ranking — Redesign CBF</h3>
+            <p class="text-muted">Consulta do ranking relacionado aos trabalhos de redesign da CBF.</p>
+            <a class="btn btn-sm btn-outline-success" href="https://politecvirtual.com.br/mod/assign/view.php?id=39566" target="_blank" rel="noopener noreferrer">Ver ranking</a>
+          </div>
+          <hr>
+          <div class="mb-4">
+            <h3 class="h5 fw-bold">24/06 — Redesign Banner Arraiá Politec</h3>
+            <p class="text-muted">Desenvolvimento de uma proposta de redesign para um banner do Arraiá Politec, trabalhando composição e comunicação visual.</p>
+            <a class="btn btn-sm btn-outline-success" href="https://politecvirtual.com.br/mod/assign/view.php?id=39590" target="_blank" rel="noopener noreferrer">Ver atividade</a>
+          </div>
+          <hr>
+          <div class="mb-4">
+            <h3 class="h5 fw-bold">Conteúdo: Margem e Sangria</h3>
+            <p class="text-muted">Estudo sobre margem e sangria, recursos importantes para preparar materiais gráficos corretamente para impressão.</p>
+            <a class="btn btn-sm btn-outline-success" href="https://politecvirtual.com.br/mod/resource/view.php?id=39612" target="_blank" rel="noopener noreferrer">Ver material</a>
+          </div>
+          <hr>
+          <div class="mb-4">
+            <h3 class="h5 fw-bold">05/08 — Atividade: Flyer — Anúncio de Vinho</h3>
+            <p class="text-muted">Criação de um flyer para anúncio de vinho, aplicando conceitos de composição e comunicação visual.</p>
+            <a class="btn btn-sm btn-outline-success" href="https://politecvirtual.com.br/mod/assign/view.php?id=39637" target="_blank" rel="noopener noreferrer">Ver atividade</a>
+          </div>
+          <hr>
+          <div>
+            <h3 class="h5 fw-bold">26/08 — Avaliação Trimestral — 2º Semestre</h3>
+            <p class="text-muted">Avaliação trimestral que reúne os conhecimentos desenvolvidos ao longo das atividades do segundo semestre.</p>
+            <a class="btn btn-sm btn-outline-success" href="https://politecvirtual.com.br/mod/assign/view.php?id=39656" target="_blank" rel="noopener noreferrer">Ver avaliação</a>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONHECIMENTOS ADQUIRIDOS -->
+  <section class="py-5" id="conhecimentos">
+    <div class="container py-5">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-5">
+          <p class="text-uppercase fw-bold mb-2" style="color:var(--verde); letter-spacing:.1em;">Resultados da aprendizagem</p>
+          <h2 class="section-title display-6">Conhecimentos adquiridos</h2>
+          <div class="divider" style="margin-left:0;"></div>
+          <p class="text-muted">Ao longo da disciplina, os conhecimentos podem ser aplicados de maneira prática em diferentes situações de comunicação.</p>
+        </div>
+        <div class="col-lg-7">
+          <div class="timeline ps-4">
+            <div class="timeline-item mb-4"><h3 class="h5 fw-bold">Comunicar melhor</h3><p class="text-muted mb-0">Compreender como adaptar a mensagem ao objetivo e ao público-alvo.</p></div>
+            <div class="timeline-item mb-4"><h3 class="h5 fw-bold">Criar conteúdos</h3><p class="text-muted mb-0">Desenvolver textos e materiais visuais com criatividade e organização.</p></div>
+            <div class="timeline-item mb-4"><h3 class="h5 fw-bold">Planejar estratégias</h3><p class="text-muted mb-0">Definir objetivos, ações e canais para uma campanha de comunicação.</p></div>
+            <div class="timeline-item"><h3 class="h5 fw-bold">Utilizar ferramentas digitais</h3><p class="text-muted mb-0">Aplicar programas e plataformas digitais na produção e divulgação de conteúdos.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- CTA -->
+  <section class="cta py-5">
+    <div class="container py-4 text-center">
+      <h2 class="fw-bold mb-3">Publicidade também é estratégia.</h2>
+      <p class="mb-4 text-white-50">Criatividade, comunicação e tecnologia trabalhando juntas para transformar ideias em mensagens.</p>
+      <a href="#inicio" class="btn btn-light btn-lg px-4">Voltar ao início</a>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer class="py-4">
+    <div class="container text-center">
+      <p class="mb-1"><strong>Publicidade e Propaganda</strong> • Curso Técnico em Informática</p>
+      <p class="small mb-0"> 2026 — Trabalho desenvolvido por Alyce Moreira da Silva 1-C</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
